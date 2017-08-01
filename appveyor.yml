@@ -27,8 +27,8 @@ build_script:
  - msbuild virtualsmartcard\win32\BixVReader.sln /p:Configuration=Release;Platform=%MSBUILD_PLATFORM%
  - move    virtualsmartcard\win32\BixVReaderInstaller\bin\%X64%Release\BixVReaderInstaller.msi %ARTIFACT%
 
- - msbuild virtualsmartcard\win32\vpcd-config\vpcd-config.sln /p:Configuration="Debug" /p:Platform=Win32
- - move    virtualsmartcard\win32\vpcd-config\Debug\vpcd-config.exe %ARTIFACT%
+ - cl /Ivirtualsmartcard\src\vpcd virtualsmartcard\src\local-ip.c virtualsmartcard\src\vpcd-config.c ws2_32.lib
+ - move    vpcd-config.exe %ARTIFACT%
 
  - 7z a %ARTIFACT%.zip %ARTIFACT%
  - appveyor PushArtifact %ARTIFACT%.zip
